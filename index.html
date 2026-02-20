@@ -1,11 +1,331 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fa" dir="rtl">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>پویش سامانه | کنترل هوشمند انرژی و پایش صنعتی</title>
+
+<!-- Vazirmatn Font -->
+<link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@300;400;500;700;800&display=swap" rel="stylesheet">
+
+<style>
+* { box-sizing: border-box; }
+
+body {
+    margin: 0;
+    font-family: 'Vazirmatn', sans-serif;
+    background: #0b1624;
+    color: #e6edf5;
+    line-height: 1.9;
+}
+
+/* ===== HEADER ===== */
+header {
+    background: #101b2c;
+    padding: 20px 70px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid #1f2d40;
+}
+
+header strong {
+    color: #00e676;
+    font-size: 20px;
+    font-weight: 700;
+}
+
+nav a {
+    color: #9fb3c8;
+    text-decoration: none;
+    margin-left: 28px;
+    font-size: 14px;
+    transition: 0.3s;
+}
+
+nav a:hover {
+    color: #00e676;
+}
+
+/* ===== HERO ===== */
+.hero {
+    padding: 120px 20px;
+    text-align: center;
+}
+
+.hero h1 {
+    font-size: 38px;
+    font-weight: 800;
+    margin-bottom: 20px;
+}
+
+.hero p {
+    color: #9fb3c8;
+    margin-bottom: 35px;
+}
+
+.button {
+    display: inline-block;
+    padding: 14px 32px;
+    margin: 10px;
+    border-radius: 8px;
+    background: #00c853;
+    color: white;
+    text-decoration: none;
+    font-weight: 500;
+    transition: 0.3s;
+}
+
+.button.secondary { background: #2962ff; }
+
+.button:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 25px rgba(0,0,0,0.4);
+}
+
+/* ===== STATS ===== */
+.stats {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 35px;
+    padding: 70px 40px;
+    background: #101b2c;
+}
+
+.stat-box {
+    background: #162437;
+    padding: 35px;
+    width: 230px;
+    border-radius: 14px;
+    text-align: center;
+    border: 1px solid #1f2d40;
+}
+
+.stat-box h2 {
+    margin: 0;
+    color: #00e676;
+    font-size: 32px;
+    font-weight: 800;
+}
+
+.stat-box p {
+    margin-top: 12px;
+    color: #9fb3c8;
+    font-size: 14px;
+}
+
+/* ===== SECTIONS ===== */
+.section {
+    padding: 90px 70px;
+}
+
+.section h2 {
+    text-align: center;
+    margin-bottom: 50px;
+    color: #00e676;
+    font-size: 26px;
+    font-weight: 700;
+}
+
+/* ===== CARDS ===== */
+.cards {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 45px;
+}
+
+.card {
+    background: #162437;
+    padding: 40px;
+    width: 340px;
+    border-radius: 14px;
+    border: 1px solid #1f2d40;
+    transition: 0.3s;
+}
+
+.card:hover {
+    transform: translateY(-8px);
+    border-color: #00e676;
+}
+
+.card h3 {
+    margin-top: 0;
+    font-weight: 700;
+    font-size: 20px;
+}
+
+.card p { color: #9fb3c8; }
+
+.card ul { padding-right: 20px; }
+
+/* ===== KNOWLEDGE ===== */
+.knowledge-item {
+    background: #101b2c;
+    padding: 30px;
+    border-radius: 14px;
+    margin-bottom: 30px;
+    border: 1px solid #1f2d40;
+}
+
+.knowledge-item h4 {
+    color: #00e676;
+    font-size: 18px;
+    font-weight: 700;
+}
+
+.knowledge-item p { color: #c6d4e1; }
+
+/* ===== CONTACT ===== */
+.contact-box {
+    text-align: center;
+    background: #162437;
+    padding: 40px;
+    border-radius: 14px;
+    border: 1px solid #1f2d40;
+}
+
+/* ===== FOOTER ===== */
+footer {
+    text-align: center;
+    padding: 35px;
+    background: #101b2c;
+    color: #9fb3c8;
+    margin-top: 40px;
+    font-size: 14px;
+}
+
+/* ===== RESPONSIVE ===== */
+@media (max-width: 768px) {
+    header { flex-direction: column; padding: 25px; }
+    nav { margin-top: 15px; }
+    .section { padding: 60px 25px; }
+    .stats { padding: 50px 20px; }
+    .hero h1 { font-size: 26px; }
+}
+</style>
 </head>
+
 <body>
-    
+
+<header>
+    <strong>پویش سامانه</strong>
+    <nav>
+        <a href="#">خانه</a>
+        <a href="#products">محصولات</a>
+        <a href="#knowledge">دانشنامه</a>
+        <a href="#contact">تماس با ما</a>
+        <a href="#">ورود کاربران</a>
+    </nav>
+</header>
+
+<section class="hero">
+    <h1>کنترل هوشمند انرژی، از موتورخانه تا صنعت</h1>
+    <p>سیستم‌های داده‌محور برای کاهش مصرف انرژی و پایش تجهیزات صنعتی</p>
+    <a href="#products" class="button">مشاهده محصولات</a>
+    <a href="#" class="button secondary">درخواست دموی آنلاین</a>
+</section>
+
+<section class="stats">
+    <div class="stat-box">
+        <h2>25٪</h2>
+        <p>کاهش مصرف انرژی</p>
+    </div>
+    <div class="stat-box">
+        <h2>99٪</h2>
+        <p>پایداری ارتباط</p>
+    </div>
+    <div class="stat-box">
+        <h2>24/7</h2>
+        <p>مانیتورینگ لحظه‌ای</p>
+    </div>
+    <div class="stat-box">
+        <h2>+100</h2>
+        <p>پروژه اجرا شده</p>
+    </div>
+</section>
+
+<section id="products" class="section">
+    <h2>محصولات</h2>
+    <div class="cards">
+
+        <div class="card">
+            <h3>بهین‌گرما</h3>
+            <p>سیستم هوشمند کنترل و بهینه‌سازی موتورخانه ساختمان</p>
+            <ul>
+                <li>کنترل دمای هوشمند رفت و برگشت</li>
+                <li>گزارش مصرف گاز و انرژی</li>
+                <li>ارسال هشدار خرابی</li>
+                <li>مدیریت از راه دور</li>
+            </ul>
+        </div>
+
+        <div class="card">
+            <h3>ICMS</h3>
+            <p>سیستم پایش و مانیتورینگ تجهیزات صنعتی</p>
+            <ul>
+                <li>پایش دما، فشار، ارتعاش</li>
+                <li>ثبت دیتا و تحلیل نموداری</li>
+                <li>اتصال به PLC و سنسورها</li>
+                <li>هشدار پیشگیرانه خرابی</li>
+            </ul>
+        </div>
+
+    </div>
+</section>
+
+<section id="knowledge" class="section">
+    <h2>دانشنامه</h2>
+
+    <div class="knowledge-item">
+        <h4>چرا موتورخانه‌ها انرژی هدر می‌دهند؟</h4>
+        <p>
+        تنظیم نبودن دمای رفت و برگشت، عملکرد مداوم مشعل بدون کنترل هوشمند،
+        نبود سنسور محیطی و عدم پایش آنلاین باعث مصرف بیش از نیاز واقعی می‌شود.
+        با تحلیل داده و کنترل هوشمند، می‌توان مصرف انرژی را تا 25٪ کاهش داد.
+        </p>
+    </div>
+
+    <div class="knowledge-item">
+        <h4>کنترل دمای برگشت چیست؟</h4>
+        <p>
+        دمای برگشت نشان‌دهنده میزان انتقال انرژی در سیستم گرمایشی است.
+        اختلاف بهینه بین دمای رفت و برگشت باعث افزایش راندمان و کاهش مصرف سوخت می‌شود.
+        سیستم هوشمند با تحلیل این اختلاف عملکرد مشعل و پمپ را تنظیم می‌کند.
+        </p>
+    </div>
+
+    <div class="knowledge-item">
+        <h4>تفاوت BMS و ICMS چیست؟</h4>
+        <p>
+        BMS بیشتر برای مدیریت کلی ساختمان مانند روشنایی و تهویه استفاده می‌شود،
+        اما ICMS تمرکز بر پایش صنعتی، تحلیل داده تجهیزات و جلوگیری از خرابی ناگهانی در کارخانه‌ها دارد.
+        </p>
+    </div>
+
+    <div class="knowledge-item">
+        <h4>استانداردهای پایش صنعتی چیست؟</h4>
+        <p>
+        استاندارد ISO 50001 برای مدیریت انرژی و اصول نگهداری پیش‌بینانه (Predictive Maintenance)
+        چارچوبی برای پایش دقیق تجهیزات، کاهش توقف تولید و افزایش بهره‌وری فراهم می‌کند.
+        </p>
+    </div>
+
+</section>
+
+<section id="contact" class="section">
+    <h2>تماس با ما</h2>
+    <div class="contact-box">
+        <p>ایمیل: info@pouyessamaneh.com</p>
+        <p>تلفن: 021-XXXXXXX</p>
+        <p>آدرس: تهران - ایران</p>
+    </div>
+</section>
+
+<footer>
+© 2026 پویش سامانه | طراحی داده‌محور صنعتی
+</footer>
+
 </body>
 </html>
