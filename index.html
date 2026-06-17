@@ -3,329 +3,708 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>پویش سامانه | کنترل هوشمند انرژی و پایش صنعتی</title>
-
-<!-- Vazirmatn Font -->
-<link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@300;400;500;700;800&display=swap" rel="stylesheet">
-
+<title>پویش سامانه</title>
+<link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@300;400;500;700;900&display=swap" rel="stylesheet">
 <style>
-* { box-sizing: border-box; }
-
-body {
-    margin: 0;
-    font-family: 'Vazirmatn', sans-serif;
-    background: #0b1624;
-    color: #e6edf5;
-    line-height: 1.9;
+*{margin:0;padding:0;box-sizing:border-box}
+:root{
+  --navy:#0F1E35;--navy2:#162845;--navy3:#1E3560;
+  --teal:#2E7D6B;--teal2:#3EA08A;--teal3:#7ECFC0;
+  --beige:#F6F1E9;--white:#fff;
+  --text:#1A1A1A;--muted:#64748b;--border:#E2D9CC;
 }
+html{scroll-behavior:smooth}
+body{font-family:'Vazirmatn',sans-serif;background:var(--beige);color:var(--text);direction:rtl;overflow-x:hidden}
+a{text-decoration:none;color:inherit;cursor:pointer}
+button{cursor:pointer;font-family:inherit}
 
-/* ===== HEADER ===== */
-header {
-    background: #101b2c;
-    padding: 20px 70px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    border-bottom: 1px solid #1f2d40;
-}
+/* NAV */
+nav{background:rgba(15,30,53,0.95);backdrop-filter:blur(12px);position:fixed;top:0;width:100%;z-index:300;border-bottom:1px solid rgba(255,255,255,0.07)}
+.nav-in{max-width:1160px;margin:0 auto;padding:0 2rem;display:flex;align-items:center;justify-content:space-between;height:62px}
+.logo{display:flex;align-items:center;gap:10px;color:#fff;font-size:16px;font-weight:700;cursor:pointer}
+.logo-mark{width:34px;height:34px;background:var(--teal);border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:14px;font-weight:900;color:#fff}
+.nav-links{display:flex;gap:2rem;align-items:center}
+.nav-links a{color:rgba(255,255,255,0.6);font-size:13.5px;transition:color .2s}
+.nav-links a:hover{color:#fff}
+.nav-cta{background:var(--teal);color:#fff;border:none;border-radius:8px;padding:8px 20px;font-size:13px;font-weight:600;letter-spacing:.3px;transition:background .2s,transform .1s}
+.nav-cta:hover{background:var(--teal2);transform:translateY(-1px)}
 
-header strong {
-    color: #00e676;
-    font-size: 20px;
-    font-weight: 700;
-}
-
-nav a {
-    color: #9fb3c8;
-    text-decoration: none;
-    margin-left: 28px;
-    font-size: 14px;
-    transition: 0.3s;
-}
-
-nav a:hover {
-    color: #00e676;
-}
+/* PAGES */
+.page{display:none;padding-top:62px}
+.page.active{display:block}
 
 /* ===== HERO ===== */
-.hero {
-    padding: 120px 20px;
-    text-align: center;
-}
+.hero{min-height:92vh;background:var(--navy);display:flex;align-items:center;position:relative;overflow:hidden;padding:3rem 2rem}
+/* animated grid bg */
+.hero-grid{position:absolute;inset:0;background-image:linear-gradient(rgba(46,125,107,0.06) 1px,transparent 1px),linear-gradient(90deg,rgba(46,125,107,0.06) 1px,transparent 1px);background-size:60px 60px;animation:gridMove 20s linear infinite}
+@keyframes gridMove{0%{background-position:0 0}100%{background-position:60px 60px}}
+.hero-glow{position:absolute;top:-100px;right:-100px;width:600px;height:600px;background:radial-gradient(circle,rgba(46,125,107,0.18) 0%,transparent 70%);pointer-events:none}
+.hero-glow2{position:absolute;bottom:-150px;left:-100px;width:500px;height:500px;background:radial-gradient(circle,rgba(30,53,96,0.5) 0%,transparent 70%);pointer-events:none}
+.hero-in{max-width:1160px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:5rem;align-items:center;position:relative;z-index:1}
+.hero-left{animation:fadeUp .8s ease both}
+@keyframes fadeUp{from{opacity:0;transform:translateY(30px)}to{opacity:1;transform:translateY(0)}}
+.hero-eyebrow{display:flex;align-items:center;gap:8px;margin-bottom:1.5rem}
+.hero-dot{width:8px;height:8px;background:var(--teal3);border-radius:50%;animation:pulse 2s infinite}
+@keyframes pulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.5;transform:scale(1.4)}}
+.hero-eyebrow span{font-size:12px;color:var(--teal3);letter-spacing:1.5px;text-transform:uppercase;font-weight:500}
+.hero h1{font-size:46px;font-weight:900;color:#fff;line-height:1.25;margin-bottom:1.25rem;letter-spacing:-.5px}
+.hero h1 .hl{color:var(--teal3);position:relative}
+.hero-desc{font-size:15px;color:rgba(255,255,255,0.55);line-height:2;margin-bottom:2.25rem;max-width:460px}
+.hero-actions{display:flex;gap:1rem;margin-bottom:2.5rem}
+.btn-hero-prim{background:var(--teal);color:#fff;border:none;border-radius:10px;padding:13px 28px;font-size:14px;font-weight:600;letter-spacing:.3px;transition:all .2s;box-shadow:0 4px 20px rgba(46,125,107,0.35)}
+.btn-hero-prim:hover{background:var(--teal2);transform:translateY(-2px);box-shadow:0 8px 28px rgba(46,125,107,0.45)}
+.btn-hero-out{background:transparent;color:rgba(255,255,255,0.8);border:1.5px solid rgba(255,255,255,0.2);border-radius:10px;padding:13px 28px;font-size:14px;transition:all .2s}
+.btn-hero-out:hover{border-color:rgba(255,255,255,0.6);color:#fff}
+.hero-trust{display:flex;gap:1.5rem;align-items:center}
+.trust-item{display:flex;align-items:center;gap:6px;font-size:12px;color:rgba(255,255,255,0.4)}
+.trust-item svg{width:14px;height:14px;stroke:var(--teal3);fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;flex-shrink:0}
 
-.hero h1 {
-    font-size: 38px;
-    font-weight: 800;
-    margin-bottom: 20px;
-}
+/* Dashboard card */
+.hero-right{animation:fadeUp .8s .2s ease both}
+.dash-card{background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.09);border-radius:20px;padding:1.5rem;backdrop-filter:blur(8px)}
+.dash-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:1.25rem}
+.dash-title{font-size:13px;color:rgba(255,255,255,0.6);font-weight:500}
+.online-badge{display:flex;align-items:center;gap:5px;background:rgba(46,125,107,0.2);border:1px solid rgba(46,125,107,0.3);border-radius:20px;padding:4px 10px}
+.online-dot{width:6px;height:6px;background:#4ade80;border-radius:50%;animation:pulse 2s infinite}
+.online-badge span{font-size:11px;color:#4ade80}
+.temp-row{display:grid;grid-template-columns:1fr 1fr 1fr;gap:.75rem;margin-bottom:1rem}
+.tc{background:rgba(255,255,255,0.05);border-radius:12px;padding:.9rem;text-align:center;border:1px solid rgba(255,255,255,0.06)}
+.tc-v{font-size:24px;font-weight:700;color:var(--teal3)}
+.tc-v.warn{color:#fbbf24}
+.tc-l{font-size:10px;color:rgba(255,255,255,0.35);margin-top:3px}
+.equip-row{display:grid;grid-template-columns:1fr 1fr;gap:.75rem;margin-bottom:1rem}
+.eq{background:rgba(255,255,255,0.04);border-radius:10px;padding:.75rem 1rem;display:flex;align-items:center;justify-content:space-between;border:1px solid rgba(255,255,255,0.06)}
+.eq-name{font-size:12px;color:rgba(255,255,255,0.6)}
+.eq-status{font-size:11px;border-radius:20px;padding:3px 10px;font-weight:500}
+.s-on{background:rgba(74,222,128,0.15);color:#4ade80}
+.s-auto{background:rgba(251,191,36,0.15);color:#fbbf24}
+.s-off{background:rgba(255,255,255,0.08);color:rgba(255,255,255,0.35)}
+.savings-row{background:rgba(46,125,107,0.12);border:1px solid rgba(46,125,107,0.2);border-radius:12px;padding:.9rem 1rem;display:flex;align-items:center;justify-content:space-between}
+.sav-label{font-size:12px;color:rgba(255,255,255,0.5)}
+.sav-val{font-size:15px;font-weight:700;color:var(--teal3)}
 
-.hero p {
-    color: #9fb3c8;
-    margin-bottom: 35px;
-}
+/* TICKER */
+.ticker{background:var(--navy2);border-top:1px solid rgba(255,255,255,0.06);border-bottom:1px solid rgba(255,255,255,0.06);padding:.65rem 0;overflow:hidden}
+.ticker-track{display:flex;gap:3rem;animation:ticker 25s linear infinite;white-space:nowrap}
+@keyframes ticker{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+.ticker-item{display:flex;align-items:center;gap:.6rem;font-size:13px;color:rgba(255,255,255,0.45);flex-shrink:0}
+.ticker-item strong{color:var(--teal3)}
 
-.button {
-    display: inline-block;
-    padding: 14px 32px;
-    margin: 10px;
-    border-radius: 8px;
-    background: #00c853;
-    color: white;
-    text-decoration: none;
-    font-weight: 500;
-    transition: 0.3s;
-}
+/* NUMBERS */
+.numbers{background:var(--navy);padding:4rem 2rem}
+.numbers-in{max-width:1160px;margin:0 auto;display:grid;grid-template-columns:repeat(4,1fr);gap:1.5rem}
+.num-card{text-align:center;padding:1.5rem;border-radius:16px;border:1px solid rgba(255,255,255,0.07);background:rgba(255,255,255,0.03);transition:border-color .3s,transform .3s}
+.num-card:hover{border-color:rgba(46,125,107,0.4);transform:translateY(-4px)}
+.num-val{font-size:38px;font-weight:900;color:var(--teal3);letter-spacing:-1px}
+.num-lbl{font-size:13px;color:rgba(255,255,255,0.4);margin-top:.4rem}
 
-.button.secondary { background: #2962ff; }
+/* ABOUT */
+.about{padding:7rem 2rem;background:var(--beige)}
+.about-in{max-width:1160px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:5rem;align-items:center}
+.tag{display:inline-flex;align-items:center;gap:6px;font-size:12px;color:var(--teal);background:rgba(46,125,107,0.1);border-radius:20px;padding:4px 14px;margin-bottom:.9rem;font-weight:500}
+.tag svg{width:12px;height:12px;stroke:currentColor;fill:none;stroke-width:2}
+.sec-h{font-size:30px;font-weight:800;color:var(--navy);line-height:1.35;margin-bottom:1rem;letter-spacing:-.3px}
+.sec-p{font-size:14.5px;color:var(--muted);line-height:2;margin-bottom:1.75rem}
+.check-list{display:flex;flex-direction:column;gap:.7rem;margin-bottom:2rem}
+.check-item{display:flex;align-items:flex-start;gap:.75rem;font-size:14px;color:var(--text)}
+.check-icon{width:20px;height:20px;background:rgba(46,125,107,0.12);border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:1px}
+.check-icon svg{width:10px;height:10px;stroke:var(--teal);fill:none;stroke-width:3;stroke-linecap:round;stroke-linejoin:round}
+.about-visual{display:grid;grid-template-columns:1fr 1fr;gap:1rem}
+.av-card{border-radius:16px;padding:1.5rem;text-align:center}
+.av-card.dark{background:var(--navy);border:1px solid rgba(255,255,255,0.07)}
+.av-card.light{background:#fff;border:1px solid var(--border)}
+.av-n{font-size:32px;font-weight:900;color:var(--teal3)}
+.av-card.light .av-n{color:var(--navy)}
+.av-l{font-size:12px;margin-top:.4rem}
+.av-card.dark .av-l{color:rgba(255,255,255,0.4)}
+.av-card.light .av-l{color:var(--muted)}
+.av-card.wide{grid-column:1/-1;background:linear-gradient(135deg,var(--navy) 0%,var(--navy3) 100%);border:1px solid rgba(255,255,255,0.07)}
+.av-card.wide .av-l{color:rgba(255,255,255,0.5)}
 
-.button:hover {
-    transform: translateY(-3px);
-    box-shadow: 0 8px 25px rgba(0,0,0,0.4);
-}
+/* PRODUCTS PREVIEW */
+.prod-section{padding:7rem 2rem;background:#fff}
+.prod-section-in{max-width:1160px;margin:0 auto}
+.section-head{display:flex;align-items:flex-end;justify-content:space-between;margin-bottom:3rem;flex-wrap:wrap;gap:1rem}
+.see-all{font-size:13px;color:var(--teal);font-weight:500;display:flex;align-items:center;gap:4px;transition:gap .2s}
+.see-all:hover{gap:8px}
+.prod-grid{display:grid;grid-template-columns:1.5fr 1fr 1fr;gap:1.25rem}
+.pc{border-radius:18px;padding:1.75rem;transition:transform .25s,box-shadow .25s;cursor:pointer;border:1px solid transparent}
+.pc:hover{transform:translateY(-5px)}
+.pc.hero-pc{background:linear-gradient(145deg,var(--navy) 0%,var(--navy3) 100%);box-shadow:0 8px 32px rgba(15,30,53,0.2)}
+.pc.hero-pc:hover{box-shadow:0 16px 48px rgba(15,30,53,0.3)}
+.pc.light-pc{background:var(--beige);border-color:var(--border)}
+.pc.light-pc:hover{border-color:var(--teal);box-shadow:0 8px 24px rgba(46,125,107,0.1)}
+.pc-badge{font-size:11px;border-radius:20px;padding:3px 12px;display:inline-block;margin-bottom:1rem;font-weight:500}
+.hero-pc .pc-badge{background:rgba(46,125,107,0.3);color:var(--teal3)}
+.light-pc .pc-badge{background:rgba(46,125,107,0.1);color:var(--teal)}
+.pc h3{font-size:17px;font-weight:700;margin-bottom:.6rem}
+.hero-pc h3{color:#fff}
+.light-pc h3{color:var(--navy)}
+.pc p{font-size:13px;line-height:1.8;margin-bottom:1.5rem}
+.hero-pc p{color:rgba(255,255,255,0.55)}
+.light-pc p{color:var(--muted)}
+.pc-link{display:flex;align-items:center;gap:5px;font-size:13px;font-weight:600;transition:gap .2s}
+.pc-link:hover{gap:9px}
+.hero-pc .pc-link{color:var(--teal3)}
+.light-pc .pc-link{color:var(--teal)}
 
-/* ===== STATS ===== */
-.stats {
-    display: flex;
-    justify-content: center;
-    flex-wrap: wrap;
-    gap: 35px;
-    padding: 70px 40px;
-    background: #101b2c;
-}
+/* FEATURES */
+.features{padding:7rem 2rem;background:var(--beige)}
+.features-in{max-width:1160px;margin:0 auto}
+.feat-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.25rem;margin-top:3rem}
+.feat{background:#fff;border:1px solid var(--border);border-radius:16px;padding:1.5rem;transition:transform .25s,box-shadow .25s}
+.feat:hover{transform:translateY(-4px);box-shadow:0 8px 24px rgba(0,0,0,0.07)}
+.feat-ico{width:44px;height:44px;background:rgba(46,125,107,0.1);border-radius:12px;display:flex;align-items:center;justify-content:center;margin-bottom:1rem}
+.feat-ico svg{width:22px;height:22px;stroke:var(--teal);fill:none;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+.feat h4{font-size:15px;font-weight:600;color:var(--navy);margin-bottom:.45rem}
+.feat p{font-size:13px;color:var(--muted);line-height:1.8}
 
-.stat-box {
-    background: #162437;
-    padding: 35px;
-    width: 230px;
-    border-radius: 14px;
-    text-align: center;
-    border: 1px solid #1f2d40;
-}
+/* CTA BAND */
+.cta-band{background:linear-gradient(135deg,var(--teal) 0%,#1a5c50 100%);padding:5rem 2rem;text-align:center;position:relative;overflow:hidden}
+.cta-band::before{content:'';position:absolute;inset:0;background-image:linear-gradient(rgba(255,255,255,0.05) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,0.05) 1px,transparent 1px);background-size:40px 40px}
+.cta-band-in{position:relative;z-index:1;max-width:600px;margin:0 auto}
+.cta-band h2{font-size:32px;font-weight:800;color:#fff;margin-bottom:.75rem;letter-spacing:-.3px}
+.cta-band p{font-size:15px;color:rgba(255,255,255,0.75);line-height:1.9;margin-bottom:2rem}
+.cta-band-btns{display:flex;gap:1rem;justify-content:center;flex-wrap:wrap}
+.btn-white{background:#fff;color:var(--teal);border:none;border-radius:10px;padding:13px 30px;font-size:14px;font-weight:700;transition:all .2s;box-shadow:0 4px 20px rgba(0,0,0,0.15)}
+.btn-white:hover{transform:translateY(-2px);box-shadow:0 8px 28px rgba(0,0,0,0.2)}
+.btn-white-out{background:transparent;color:#fff;border:2px solid rgba(255,255,255,0.5);border-radius:10px;padding:13px 30px;font-size:14px;font-weight:600;transition:all .2s}
+.btn-white-out:hover{border-color:#fff}
 
-.stat-box h2 {
-    margin: 0;
-    color: #00e676;
-    font-size: 32px;
-    font-weight: 800;
-}
+/* CONTACT */
+.contact{padding:7rem 2rem;background:#fff}
+.contact-in{max-width:1160px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:4rem;align-items:start}
+.contact-info{display:flex;flex-direction:column;gap:1.25rem;margin-top:1.5rem}
+.ci{display:flex;gap:1rem;align-items:flex-start}
+.ci-icon{width:44px;height:44px;background:rgba(46,125,107,0.1);border-radius:12px;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.ci-icon svg{width:20px;height:20px;stroke:var(--teal);fill:none;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+.ci h5{font-size:12px;color:var(--muted);margin-bottom:3px}
+.ci p{font-size:14px;color:var(--navy);font-weight:500}
 
-.stat-box p {
-    margin-top: 12px;
-    color: #9fb3c8;
-    font-size: 14px;
-}
+/* ORDER FORM */
+.order-form{background:var(--beige);border-radius:20px;padding:2rem}
+.fg{margin-bottom:1rem}
+.fg label{display:block;font-size:13px;font-weight:500;color:var(--navy);margin-bottom:5px}
+.fg input,.fg select,.fg textarea{width:100%;border:1.5px solid var(--border);border-radius:10px;padding:11px 14px;font-size:14px;font-family:inherit;color:var(--text);background:#fff;outline:none;transition:border-color .2s;direction:rtl}
+.fg input:focus,.fg select:focus,.fg textarea:focus{border-color:var(--teal)}
+.fg textarea{min-height:80px;resize:vertical}
+.form-submit{width:100%;background:var(--navy);color:#fff;border:none;border-radius:10px;padding:13px;font-size:14px;font-weight:600;transition:background .2s}
+.form-submit:hover{background:var(--navy3)}
+.success-box{display:none;margin-top:.75rem;padding:12px;background:rgba(46,125,107,0.08);border-radius:10px;color:var(--teal);font-size:13.5px;text-align:center;border:1px solid rgba(46,125,107,0.2)}
 
-/* ===== SECTIONS ===== */
-.section {
-    padding: 90px 70px;
-}
+/* FOOTER */
+footer{background:var(--navy);padding:3.5rem 2rem 1.5rem}
+.foot-in{max-width:1160px;margin:0 auto}
+.foot-top{display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:3rem;margin-bottom:2.5rem}
+.foot-brand p{font-size:13px;color:rgba(255,255,255,0.35);line-height:1.9;margin-top:.75rem;max-width:230px}
+.foot-col h5{font-size:13px;font-weight:600;color:#fff;margin-bottom:1rem}
+.foot-col ul{list-style:none;display:flex;flex-direction:column;gap:7px}
+.foot-col a{font-size:13px;color:rgba(255,255,255,0.38);transition:color .2s}
+.foot-col a:hover{color:rgba(255,255,255,.8)}
+.foot-bottom{border-top:1px solid rgba(255,255,255,0.07);padding-top:1.5rem;display:flex;justify-content:space-between;align-items:center}
+.foot-bottom p{font-size:12px;color:rgba(255,255,255,0.25)}
 
-.section h2 {
-    text-align: center;
-    margin-bottom: 50px;
-    color: #00e676;
-    font-size: 26px;
-    font-weight: 700;
-}
+/* PRODUCTS PAGE */
+.page-hero{background:var(--navy);padding:4rem 2rem 5rem;position:relative;overflow:hidden}
+.page-hero::after{content:'';position:absolute;bottom:-2px;left:0;right:0;height:40px;background:var(--beige);clip-path:ellipse(55% 100% at 50% 100%)}
+.page-hero-in{max-width:1160px;margin:0 auto;position:relative;z-index:1}
+.breadcrumb{display:flex;align-items:center;gap:6px;margin-bottom:1rem}
+.breadcrumb span{font-size:12px;color:rgba(255,255,255,0.35)}
+.breadcrumb a{font-size:12px;color:rgba(255,255,255,0.55)}
+.breadcrumb a:hover{color:#fff}
+.page-hero h2{font-size:30px;font-weight:800;color:#fff;margin-bottom:.4rem;letter-spacing:-.3px}
+.page-hero p{font-size:14px;color:rgba(255,255,255,0.5)}
+.prods-wrap{padding:5rem 2rem;background:var(--beige)}
+.prods-wrap-in{max-width:1160px;margin:0 auto}
+.pl-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:1.5rem}
+.pli{background:#fff;border:1px solid var(--border);border-radius:18px;overflow:hidden;transition:transform .25s,box-shadow .25s}
+.pli:hover{transform:translateY(-5px);box-shadow:0 12px 36px rgba(0,0,0,0.09)}
+.pli.feat{border-color:var(--teal);grid-column:1/-1}
+.pli-body{padding:1.5rem;display:flex;gap:1rem;align-items:flex-start}
+.pli-ico{width:50px;height:50px;border-radius:13px;background:rgba(46,125,107,0.1);display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.pli.feat .pli-ico{background:rgba(15,30,53,0.08)}
+.pli-ico svg{width:23px;height:23px;stroke:var(--teal);fill:none;stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round}
+.pli.feat .pli-ico svg{stroke:var(--navy)}
+.pli-text .badge{font-size:11px;color:var(--teal);background:rgba(46,125,107,0.1);border-radius:20px;padding:2px 10px;display:inline-block;margin-bottom:.4rem;font-weight:500}
+.pli.feat .pli-text .badge{background:var(--navy);color:var(--teal3)}
+.pli-text h3{font-size:15.5px;font-weight:700;color:var(--navy);margin-bottom:.4rem}
+.pli-text p{font-size:13px;color:var(--muted);line-height:1.8}
+.pli-foot{padding:.85rem 1.5rem;border-top:1px solid var(--border);display:flex;justify-content:space-between;align-items:center;background:rgba(0,0,0,0.01)}
+.pli-btn{background:none;border:none;font-size:13px;color:var(--teal);font-weight:600;display:flex;align-items:center;gap:4px;transition:gap .2s}
+.pli-btn:hover{gap:8px}
+.pli-order{background:var(--teal);color:#fff;border:none;border-radius:8px;padding:7px 18px;font-size:12.5px;font-weight:600;transition:background .2s}
+.pli-order:hover{background:var(--teal2)}
 
-/* ===== CARDS ===== */
-.cards {
-    display: flex;
-    justify-content: center;
-    flex-wrap: wrap;
-    gap: 45px;
-}
+/* DETAIL */
+.detail-wrap{padding:5rem 2rem;background:var(--beige)}
+.detail-in{max-width:1160px;margin:0 auto}
+.det-top{display:grid;grid-template-columns:1.1fr 1fr;gap:3.5rem;margin-bottom:3.5rem;align-items:start}
+.det-left h1{font-size:30px;font-weight:800;color:var(--navy);margin-bottom:.75rem;letter-spacing:-.3px}
+.det-left p{font-size:14.5px;color:var(--muted);line-height:2;margin-bottom:1.5rem}
+.det-feats{display:flex;flex-direction:column;gap:.65rem;margin-bottom:2rem}
+.det-feat{display:flex;align-items:flex-start;gap:.75rem;font-size:14px;color:var(--text)}
+.det-feat-ic{width:20px;height:20px;background:rgba(46,125,107,0.12);border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:1px}
+.det-feat-ic svg{width:10px;height:10px;stroke:var(--teal);fill:none;stroke-width:3;stroke-linecap:round;stroke-linejoin:round}
+.det-btns{display:flex;gap:.9rem;flex-wrap:wrap}
+.btn-navy{background:var(--navy);color:#fff;border:none;border-radius:10px;padding:12px 26px;font-size:14px;font-weight:600;transition:all .2s}
+.btn-navy:hover{background:var(--navy3);transform:translateY(-1px)}
+.btn-border{background:transparent;color:var(--navy);border:1.5px solid var(--border);border-radius:10px;padding:12px 26px;font-size:14px;transition:all .2s}
+.btn-border:hover{border-color:var(--teal);color:var(--teal)}
+.det-right{background:var(--navy);border-radius:20px;padding:1.75rem}
+.det-specs-t{font-size:12px;color:rgba(255,255,255,0.35);font-weight:500;margin-bottom:1rem;letter-spacing:.5px;text-transform:uppercase}
+.det-specs{display:grid;grid-template-columns:1fr 1fr;gap:.75rem;margin-bottom:1.75rem}
+.ds{background:rgba(255,255,255,0.05);border-radius:12px;padding:1rem;text-align:center;border:1px solid rgba(255,255,255,0.06)}
+.ds-v{font-size:20px;font-weight:700;color:var(--teal3)}
+.ds-l{font-size:10px;color:rgba(255,255,255,0.35);margin-top:3px}
+.det-phases{display:flex;flex-direction:column;gap:.6rem}
+.det-phase{display:flex;align-items:center;gap:.75rem;background:rgba(255,255,255,0.04);border-radius:10px;padding:.7rem 1rem;border:1px solid rgba(255,255,255,0.06)}
+.dp-num{width:24px;height:24px;background:var(--teal);border-radius:50%;font-size:11px;font-weight:700;color:#fff;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.det-phase p{font-size:12.5px;color:rgba(255,255,255,0.65);line-height:1.5}
+.det-cards-sec h2{font-size:19px;font-weight:700;color:var(--navy);margin-bottom:1.5rem;padding-bottom:.75rem;border-bottom:1.5px solid var(--border)}
+.det-cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:1rem}
+.dc{background:#fff;border:1px solid var(--border);border-radius:14px;padding:1.25rem;transition:transform .2s,box-shadow .2s}
+.dc:hover{transform:translateY(-3px);box-shadow:0 6px 20px rgba(0,0,0,0.07)}
+.dc h4{font-size:14px;font-weight:600;color:var(--navy);margin-bottom:.4rem}
+.dc p{font-size:12.5px;color:var(--muted);line-height:1.8}
+.coming-card{background:#fff;border:2px dashed var(--border);border-radius:18px;padding:4rem 2rem;text-align:center}
+.coming-card h3{font-size:18px;font-weight:700;color:var(--navy);margin-bottom:.65rem}
+.coming-card p{font-size:14px;color:var(--muted);line-height:1.9;margin-bottom:1.75rem}
 
-.card {
-    background: #162437;
-    padding: 40px;
-    width: 340px;
-    border-radius: 14px;
-    border: 1px solid #1f2d40;
-    transition: 0.3s;
-}
-
-.card:hover {
-    transform: translateY(-8px);
-    border-color: #00e676;
-}
-
-.card h3 {
-    margin-top: 0;
-    font-weight: 700;
-    font-size: 20px;
-}
-
-.card p { color: #9fb3c8; }
-
-.card ul { padding-right: 20px; }
-
-/* ===== KNOWLEDGE ===== */
-.knowledge-item {
-    background: #101b2c;
-    padding: 30px;
-    border-radius: 14px;
-    margin-bottom: 30px;
-    border: 1px solid #1f2d40;
-}
-
-.knowledge-item h4 {
-    color: #00e676;
-    font-size: 18px;
-    font-weight: 700;
-}
-
-.knowledge-item p { color: #c6d4e1; }
-
-/* ===== CONTACT ===== */
-.contact-box {
-    text-align: center;
-    background: #162437;
-    padding: 40px;
-    border-radius: 14px;
-    border: 1px solid #1f2d40;
-}
-
-/* ===== FOOTER ===== */
-footer {
-    text-align: center;
-    padding: 35px;
-    background: #101b2c;
-    color: #9fb3c8;
-    margin-top: 40px;
-    font-size: 14px;
-}
-
-/* ===== RESPONSIVE ===== */
-@media (max-width: 768px) {
-    header { flex-direction: column; padding: 25px; }
-    nav { margin-top: 15px; }
-    .section { padding: 60px 25px; }
-    .stats { padding: 50px 20px; }
-    .hero h1 { font-size: 26px; }
-}
+/* ORDER PAGE */
+.order-page{padding:5rem 2rem;background:var(--beige)}
+.order-in{max-width:920px;margin:0 auto}
+.order-box{background:#fff;border:1px solid var(--border);border-radius:22px;padding:2.75rem;display:grid;grid-template-columns:1fr 1fr;gap:3rem}
+.osteps{display:flex;flex-direction:column;gap:1rem;margin-top:.5rem}
+.ost{display:flex;gap:.9rem;align-items:flex-start}
+.ost-n{width:28px;height:28px;background:var(--navy);color:#fff;border-radius:50%;font-size:12px;font-weight:700;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:2px}
+.ost h4{font-size:13px;font-weight:600;color:var(--navy)}
+.ost p{font-size:12px;color:var(--muted);margin-top:2px;line-height:1.6}
+.contact-box{margin-top:1.75rem;background:var(--beige);border-radius:14px;padding:1.25rem}
+.contact-box h5{font-size:13px;font-weight:600;color:var(--navy);margin-bottom:.75rem}
+.contact-box p{font-size:13px;color:var(--muted);margin-bottom:.35rem;display:flex;align-items:center;gap:.4rem}
 </style>
 </head>
-
 <body>
 
-<header>
-    <strong>پویش سامانه</strong>
-    <nav>
-        <a href="#">خانه</a>
-        <a href="#products">محصولات</a>
-        <a href="#knowledge">دانشنامه</a>
-        <a href="#contact">تماس با ما</a>
-        <a href="#">ورود کاربران</a>
-    </nav>
-</header>
-
-<section class="hero">
-    <h1>کنترل هوشمند انرژی، از موتورخانه تا صنعت</h1>
-    <p>سیستم‌های داده‌محور برای کاهش مصرف انرژی و پایش تجهیزات صنعتی</p>
-    <a href="#products" class="button">مشاهده محصولات</a>
-    <a href="#" class="button secondary">درخواست دموی آنلاین</a>
-</section>
-
-<section class="stats">
-    <div class="stat-box">
-        <h2>25٪</h2>
-        <p>کاهش مصرف انرژی</p>
+<nav>
+  <div class="nav-in">
+    <div class="logo" onclick="go('home')">
+      <div class="logo-mark">پ</div>
+      پویش سامانه
     </div>
-    <div class="stat-box">
-        <h2>99٪</h2>
-        <p>پایداری ارتباط</p>
+    <div class="nav-links">
+      <a onclick="go('home')">خانه</a>
+      <a onclick="go('products')">محصولات</a>
+      <a onclick="go('order')">ثبت سفارش</a>
+      <a onclick="goContact()">تماس</a>
+      <a class="nav-cta" href="https://80.191.223.241:44482"> ورود به پنل </a>
     </div>
-    <div class="stat-box">
-        <h2>24/7</h2>
-        <p>مانیتورینگ لحظه‌ای</p>
-    </div>
-    <div class="stat-box">
-        <h2>+100</h2>
-        <p>پروژه اجرا شده</p>
-    </div>
-</section>
+  </div>
+</nav>
 
-<section id="products" class="section">
-    <h2>محصولات</h2>
-    <div class="cards">
+<!-- ======== HOME ======== -->
+<div class="page active" id="page-home">
 
-        <div class="card">
-            <h3>بهین‌گرما</h3>
-            <p>سیستم هوشمند کنترل و بهینه‌سازی موتورخانه ساختمان</p>
-            <ul>
-                <li>کنترل دمای هوشمند رفت و برگشت</li>
-                <li>گزارش مصرف گاز و انرژی</li>
-                <li>ارسال هشدار خرابی</li>
-                <li>مدیریت از راه دور</li>
-            </ul>
+  <section class="hero">
+    <div class="hero-grid"></div>
+    <div class="hero-glow"></div>
+    <div class="hero-glow2"></div>
+    <div class="hero-in">
+      <div class="hero-left">
+        <div class="hero-eyebrow">
+          <div class="hero-dot"></div>
+          <span>فناوری هوشمند تأسیسات</span>
         </div>
-
-        <div class="card">
-            <h3>ICMS</h3>
-            <p>سیستم پایش و مانیتورینگ تجهیزات صنعتی</p>
-            <ul>
-                <li>پایش دما، فشار، ارتعاش</li>
-                <li>ثبت دیتا و تحلیل نموداری</li>
-                <li>اتصال به PLC و سنسورها</li>
-                <li>هشدار پیشگیرانه خرابی</li>
-            </ul>
+        <h1>موتورخانه‌ات را<br><span class="hl">هوشمند</span> کن</h1>
+        <p class="hero-desc">پویش سامانه با محصول بهین‌گرما، کنترل کامل موتورخانه را در دستانت می‌گذارد — پایش زنده، هشدار آنی، صرفه‌جویی واقعی.</p>
+        <div class="hero-actions">
+          <button class="btn-hero-prim" onclick="showDet('behin-garma')">بهین‌گرما را ببین</button>
+          <button class="btn-hero-out" onclick="go('order')">مشاوره رایگان</button>
         </div>
-
+        <div class="hero-trust">
+          <div class="trust-item"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>امنیت سایبری ملی</div>
+          <div class="trust-item"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>پشتیبانی ۲۴/۷</div>
+          <div class="trust-item"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>نصب آسان</div>
+        </div>
+      </div>
+      <div class="hero-right">
+        <div class="dash-card">
+          <div class="dash-header">
+            <span class="dash-title">داشبورد بهین‌گرما</span>
+            <div class="online-badge"><div class="online-dot"></div><span>آنلاین</span></div>
+          </div>
+          <div class="temp-row">
+            <div class="tc"><div class="tc-v">۶۲°</div><div class="tc-l">آب رفت</div></div>
+            <div class="tc"><div class="tc-v">۴۸°</div><div class="tc-l">آب برگشت</div></div>
+            <div class="tc"><div class="tc-v warn">-۳°</div><div class="tc-l">بیرون</div></div>
+          </div>
+          <div class="equip-row">
+            <div class="eq"><span class="eq-name">مشعل ۱</span><span class="eq-status s-on">روشن</span></div>
+            <div class="eq"><span class="eq-name">مشعل ۲</span><span class="eq-status s-off">خاموش</span></div>
+            <div class="eq"><span class="eq-name">پمپ رفت</span><span class="eq-status s-auto">اتوماتیک</span></div>
+            <div class="eq"><span class="eq-name">پمپ برگشت</span><span class="eq-status s-auto">اتوماتیک</span></div>
+          </div>
+          <div class="savings-row">
+            <span class="sav-label">صرفه‌جویی این ماه در گاز</span>
+            <span class="sav-val">↓ ۱۸٪</span>
+          </div>
+        </div>
+      </div>
     </div>
-</section>
+  </section>
 
-<section id="knowledge" class="section">
-    <h2>دانشنامه</h2>
-
-    <div class="knowledge-item">
-        <h4>چرا موتورخانه‌ها انرژی هدر می‌دهند؟</h4>
-        <p>
-        تنظیم نبودن دمای رفت و برگشت، عملکرد مداوم مشعل بدون کنترل هوشمند،
-        نبود سنسور محیطی و عدم پایش آنلاین باعث مصرف بیش از نیاز واقعی می‌شود.
-        با تحلیل داده و کنترل هوشمند، می‌توان مصرف انرژی را تا 25٪ کاهش داد.
-        </p>
+  <div class="ticker">
+    <div class="ticker-track">
+      <span class="ticker-item">🔥 <strong>بهین‌گرما</strong> — کنترل هوشمند موتورخانه</span>
+      <span class="ticker-item">🛡 <strong>حفاظت کاتدی</strong> — نگهداری خطوط لوله</span>
+      <span class="ticker-item">⚡ <strong>سیستم ارتینگ</strong> — ایمنی الکتریکی کامل</span>
+      <span class="ticker-item">📡 <strong>PCM & DCVG</strong> — عیب‌یابی پیشرفته</span>
+      <span class="ticker-item">🔥 <strong>بهین‌گرما</strong> — کنترل هوشمند موتورخانه</span>
+      <span class="ticker-item">🛡 <strong>حفاظت کاتدی</strong> — نگهداری خطوط لوله</span>
+      <span class="ticker-item">⚡ <strong>سیستم ارتینگ</strong> — ایمنی الکتریکی کامل</span>
+      <span class="ticker-item">📡 <strong>PCM & DCVG</strong> — عیب‌یابی پیشرفته</span>
     </div>
+  </div>
 
-    <div class="knowledge-item">
-        <h4>کنترل دمای برگشت چیست؟</h4>
-        <p>
-        دمای برگشت نشان‌دهنده میزان انتقال انرژی در سیستم گرمایشی است.
-        اختلاف بهینه بین دمای رفت و برگشت باعث افزایش راندمان و کاهش مصرف سوخت می‌شود.
-        سیستم هوشمند با تحلیل این اختلاف عملکرد مشعل و پمپ را تنظیم می‌کند.
-        </p>
+  <section class="numbers">
+    <div class="numbers-in">
+      <div class="num-card"><div class="num-val">۴+</div><div class="num-lbl">پروژه موفق</div></div>
+      <div class="num-card"><div class="num-val">۷</div><div class="num-lbl">خدمات تخصصی</div></div>
+      <div class="num-card"><div class="num-val">۲۴/۷</div><div class="num-lbl">پشتیبانی فنی</div></div>
+      <div class="num-card"><div class="num-val">۱۸٪</div><div class="num-lbl">میانگین صرفه‌جویی گاز</div></div>
     </div>
+  </section>
 
-    <div class="knowledge-item">
-        <h4>تفاوت BMS و ICMS چیست؟</h4>
-        <p>
-        BMS بیشتر برای مدیریت کلی ساختمان مانند روشنایی و تهویه استفاده می‌شود،
-        اما ICMS تمرکز بر پایش صنعتی، تحلیل داده تجهیزات و جلوگیری از خرابی ناگهانی در کارخانه‌ها دارد.
-        </p>
+  <section class="about">
+    <div class="about-in">
+      <div>
+        <div class="tag"><svg viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/></svg> درباره پویش سامانه</div>
+        <h2 class="sec-h">متخصص هوشمندسازی تأسیسات</h2>
+        <p class="sec-p">پویش سامانه با تکیه بر دانش فنی و تجربه عملی، راهکارهای یکپارچه‌ای برای بهینه‌سازی سیستم‌های تأسیساتی ساختمان‌های مسکونی، اداری و صنعتی ارائه می‌دهد.</p>
+        <div class="check-list">
+          <div class="check-item"><div class="check-icon"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div>طراحی و تولید دستگاه‌های هوشمند کنترل موتورخانه</div>
+          <div class="check-item"><div class="check-icon"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div>اجرای سیستم‌های حفاظت کاتدی برای خطوط لوله</div>
+          <div class="check-item"><div class="check-icon"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div>عیب‌یابی کابل‌های مدفون بدون حفاری</div>
+          <div class="check-item"><div class="check-icon"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div>اندازه‌گیری و اجرای سیستم‌های ارتینگ استاندارد</div>
+        </div>
+        <button class="btn-navy" onclick="go('products')">همه خدمات ما</button>
+      </div>
+      <div class="about-visual">
+        <div class="av-card dark"><div class="av-n">۴+</div><div class="av-l">پروژه موفق</div></div>
+        <div class="av-card light"><div class="av-n" style="color:var(--navy)">۷</div><div class="av-l">سرویس تخصصی</div></div>
+        <div class="av-card wide"><div class="av-n">زنجان</div><div class="av-l">پایگاه اصلی شرکت — خدمات در سطح ملی</div></div>
+      </div>
     </div>
+  </section>
 
-    <div class="knowledge-item">
-        <h4>استانداردهای پایش صنعتی چیست؟</h4>
-        <p>
-        استاندارد ISO 50001 برای مدیریت انرژی و اصول نگهداری پیش‌بینانه (Predictive Maintenance)
-        چارچوبی برای پایش دقیق تجهیزات، کاهش توقف تولید و افزایش بهره‌وری فراهم می‌کند.
-        </p>
+  <section class="prod-section">
+    <div class="prod-section-in">
+      <div class="section-head">
+        <div>
+          <div class="tag">محصولات</div>
+          <h2 class="sec-h" style="margin-bottom:0">راهکارهای ما</h2>
+        </div>
+        <a class="see-all" onclick="go('products')">همه محصولات ←</a>
+      </div>
+      <div class="prod-grid">
+        <div class="pc hero-pc" onclick="showDet('behin-garma')">
+          <span class="pc-badge">محصول اصلی ⭐</span>
+          <h3>بهین‌گرما</h3>
+          <p>پلتفرم جامع پایش و کنترل هوشمند موتورخانه — پایش زنده، کنترل از راه دور، هشدار آنی</p>
+          <div class="pc-link">مشاهده محصول <span>←</span></div>
+        </div>
+        <div class="pc light-pc" onclick="showDet('cathodic-smart')">
+          <span class="pc-badge">حفاظت کاتدی</span>
+          <h3>هوشمندسازی حفاظت کاتدی</h3>
+          <p>پایش و کنترل هوشمند سیستم‌های حفاظت کاتدی</p>
+          <div class="pc-link">مشاهده <span>←</span></div>
+        </div>
+        <div class="pc light-pc" onclick="showDet('cathodic-impl')">
+          <span class="pc-badge">حفاظت کاتدی</span>
+          <h3>اجرای حفاظت کاتدی</h3>
+          <p>طراحی و اجرای کامل سیستم‌های حفاظت کاتدی</p>
+          <div class="pc-link">مشاهده <span>←</span></div>
+        </div>
+      </div>
     </div>
+  </section>
 
-</section>
-
-<section id="contact" class="section">
-    <h2>تماس با ما</h2>
-    <div class="contact-box">
-        <p>ایمیل: info@pouyessamaneh.com</p>
-        <p>تلفن: 021-XXXXXXX</p>
-        <p>آدرس: تهران - ایران</p>
+  <section class="features">
+    <div class="features-in">
+      <div class="tag">چرا ما؟</div>
+      <h2 class="sec-h">مزایای پویش سامانه</h2>
+      <div class="feat-grid">
+        <div class="feat"><div class="feat-ico"><svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div><h4>امنیت سایبری ملی</h4><p>رمزنگاری کامل و احراز هویت چندلایه طبق استانداردهای شرکت ملی گاز</p></div>
+        <div class="feat"><div class="feat-ico"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg></div><h4>پشتیبانی ۲۴/۷</h4><p>تیم فنی ما در تمام ساعات آماده پاسخگویی و رفع اشکال است</p></div>
+        <div class="feat"><div class="feat-ico"><svg viewBox="0 0 24 24"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg></div><h4>عملکرد مستقل</h4><p>حافظه یک‌ماهه و باتری پشتیبان — حتی در قطع برق و اینترنت</p></div>
+        <div class="feat"><div class="feat-ico"><svg viewBox="0 0 24 24"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg></div><h4>صرفه‌جویی واقعی</h4><p>کاهش متوسط ۱۸٪ مصرف گاز با تنظیم هوشمند سناریوها</p></div>
+        <div class="feat"><div class="feat-ico"><svg viewBox="0 0 24 24"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/></svg></div><h4>داشبورد تحت وب</h4><p>مدیریت کامل از هر مکان با مرورگر یا اپلیکیشن موبایل</p></div>
+        <div class="feat"><div class="feat-ico"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M12 1v4M12 19v4M4.22 4.22l2.83 2.83M16.95 16.95l2.83 2.83M1 12h4M19 12h4"/></svg></div><h4>نصب ساده</h4><p>نصب و راه‌اندازی توسط تیم فنی ما در کمترین زمان ممکن</p></div>
+      </div>
     </div>
-</section>
+  </section>
 
-<footer>
-© 2026 پویش سامانه | طراحی داده‌محور صنعتی
-</footer>
+  <div class="cta-band">
+    <div class="cta-band-in">
+      <h2>آماده‌ای موتورخانه‌ات را هوشمند کنی؟</h2>
+      <p>همین الان با ما تماس بگیر یا سفارشت را ثبت کن — مشاوره اولیه کاملاً رایگانه.</p>
+      <div class="cta-band-btns">
+        <button class="btn-white" onclick="go('order')">ثبت سفارش رایگان</button>
+        <button class="btn-white-out" onclick="goContact()">تماس با ما</button>
+      </div>
+    </div>
+  </div>
 
+  <section class="contact" id="contact-sec">
+    <div class="contact-in">
+      <div>
+        <div class="tag">تماس با ما</div>
+        <h2 class="sec-h">با ما در تماس باش</h2>
+        <p class="sec-p">برای مشاوره، استعلام قیمت یا هر سوالی با ما تماس بگیرید.</p>
+        <div class="contact-info">
+          <div class="ci"><div class="ci-icon"><svg viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12 19.79 19.79 0 0 1 1.61 3.35 2 2 0 0 1 3.6 1.18h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.96a16 16 0 0 0 6 6z"/></svg></div><div><h5>تلفن</h5><p>۰۹۱۲۲۴۱۰۸۲۸</p></div></div>
+          <div class="ci"><div class="ci-icon"><svg viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg></div><div><h5>ایمیل</h5><p>pooyeshsamaneh@gmail.com</p></div></div>
+          <div class="ci"><div class="ci-icon"><svg viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg></div><div><h5>آدرس</h5><p>زنجان، خیابان بعثت، نبش کوچه انگورانی</p></div></div>
+        </div>
+      </div>
+      <div class="order-form">
+        <h3 style="font-size:17px;font-weight:700;color:var(--navy);margin-bottom:1.25rem">درخواست مشاوره رایگان</h3>
+        <div class="fg"><label>نام شما</label><input type="text" id="c-name"></div>
+        <div class="fg"><label>شماره موبایل</label><input type="tel" id="c-phone"></div>
+        <div class="fg"><label>موضوع</label>
+          <select id="c-subject">
+            <option>بهین‌گرما</option>
+            <option>حفاظت کاتدی</option>
+            <option>سیستم ارتینگ</option>
+            <option>عیب‌یابی کابل</option>
+            <option>سایر</option>
+          </select>
+        </div>
+        <div class="fg"><label>پیام (اختیاری)</label><textarea id="c-msg" rows="3"></textarea></div>
+        <button class="form-submit" onclick="submitContact()">ارسال درخواست</button>
+        <div class="success-box" id="c-success">درخواست شما دریافت شد! به‌زودی تماس می‌گیریم.</div>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <div class="foot-in">
+      <div class="foot-top">
+        <div class="foot-brand">
+          <div class="logo"><div class="logo-mark">پ</div><span style="color:#fff">پویش سامانه</span></div>
+          <p>هوشمندسازی تأسیسات — از موتورخانه تا حفاظت کاتدی و سیستم‌های ارتینگ</p>
+        </div>
+        <div class="foot-col"><h5>محصولات</h5><ul>
+          <li><a onclick="showDet('behin-garma')">بهین‌گرما</a></li>
+          <li><a onclick="showDet('cathodic-smart')">هوشمندسازی کاتدی</a></li>
+          <li><a onclick="showDet('cathodic-impl')">اجرای کاتدی</a></li>
+          <li><a onclick="go('products')">همه محصولات</a></li>
+        </ul></div>
+        <div class="foot-col"><h5>خدمات</h5><ul>
+          <li><a>نصب و راه‌اندازی</a></li>
+          <li><a>پشتیبانی فنی</a></li>
+          <li><a>مشاوره رایگان</a></li>
+        </ul></div>
+        <div class="foot-col"><h5>تماس</h5><ul>
+          <li><a href="tel:09122410828">۰۹۱۲۲۴۱۰۸۲۸</a></li>
+          <li><a href="mailto:pooyeshsamaneh@gmail.com" style="font-size:11.5px">pooyeshsamaneh@gmail.com</a></li>
+          <li><a>زنجان، خیابان بعثت</a></li>
+        </ul></div>
+      </div>
+      <div class="foot-bottom">
+        <p>© ۱۴۰۴ پویش سامانه — تمامی حقوق محفوظ است</p>
+        <p>ساخته‌شده با افتخار در ایران 🇮🇷</p>
+      </div>
+    </div>
+  </footer>
+</div>
+
+<!-- ======== PRODUCTS ======== -->
+<div class="page" id="page-products">
+  <div class="page-hero">
+    <div class="page-hero-in">
+      <div class="breadcrumb"><a onclick="go('home')">خانه</a><span>/</span><span>محصولات</span></div>
+      <h2>محصولات و خدمات</h2>
+      <p>راهکارهای تخصصی پویش سامانه در حوزه هوشمندسازی تأسیسات</p>
+    </div>
+  </div>
+  <div class="prods-wrap">
+    <div class="prods-wrap-in">
+      <div class="pl-grid">
+        <div class="pli feat">
+          <div class="pli-body">
+            <div class="pli-ico"><svg viewBox="0 0 24 24"><path d="M18 8h1a4 4 0 0 1 0 8h-1"/><path d="M2 8h16v9a4 4 0 0 1-4 4H6a4 4 0 0 1-4-4V8z"/><line x1="6" y1="1" x2="6" y2="4"/><line x1="10" y1="1" x2="10" y2="4"/><line x1="14" y1="1" x2="14" y2="4"/></svg></div>
+            <div class="pli-text">
+              <span class="badge">محصول اصلی ⭐</span>
+              <h3>بهین‌گرما</h3>
+              <p>پلتفرم جامع و هوشمند پایش و کنترل موتورخانه — پایش لحظه‌ای، کنترل از راه دور، امنیت سایبری ملی، عملکرد مستقل در قطع برق</p>
+            </div>
+          </div>
+          <div class="pli-foot">
+            <button class="pli-btn" onclick="showDet('behin-garma')">مشاهده جزئیات <span>←</span></button>
+            <button class="pli-order" onclick="go('order')">ثبت سفارش</button>
+          </div>
+        </div>
+        <div class="pli"><div class="pli-body"><div class="pli-ico"><svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div><div class="pli-text"><span class="badge">حفاظت کاتدی</span><h3>هوشمندسازی حفاظت کاتدی</h3><p>راهکارهای هوشمند برای پایش و کنترل سیستم‌های حفاظت کاتدی</p></div></div><div class="pli-foot"><button class="pli-btn" onclick="showDet('cathodic-smart')">جزئیات <span>←</span></button><button class="pli-order" onclick="go('order')">ثبت سفارش</button></div></div>
+        <div class="pli"><div class="pli-body"><div class="pli-ico"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="16"/><line x1="8" y1="12" x2="16" y2="12"/></svg></div><div class="pli-text"><span class="badge">حفاظت کاتدی</span><h3>اجرای سیستم‌های حفاظت کاتدی</h3><p>طراحی، تأمین تجهیزات و اجرای کامل سیستم‌های حفاظت کاتدی</p></div></div><div class="pli-foot"><button class="pli-btn" onclick="showDet('cathodic-impl')">جزئیات <span>←</span></button><button class="pli-order" onclick="go('order')">ثبت سفارش</button></div></div>
+        <div class="pli"><div class="pli-body"><div class="pli-ico"><svg viewBox="0 0 24 24"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg></div><div class="pli-text"><span class="badge">عیب‌یابی</span><h3>عیب‌یابی پوشش‌های شبکه (PCM & DCVG)</h3><p>تشخیص نقاط آسیب‌دیده پوشش خطوط لوله با تجهیزات پیشرفته</p></div></div><div class="pli-foot"><button class="pli-btn" onclick="showDet('pcm-dcvg')">جزئیات <span>←</span></button><button class="pli-order" onclick="go('order')">ثبت سفارش</button></div></div>
+        <div class="pli"><div class="pli-body"><div class="pli-ico"><svg viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/></svg></div><div class="pli-text"><span class="badge">عیب‌یابی</span><h3>عیب‌یابی کابل‌های مدفون</h3><p>شناسایی دقیق محل خرابی کابل‌های زیرزمینی بدون حفاری</p></div></div><div class="pli-foot"><button class="pli-btn" onclick="showDet('buried-cable')">جزئیات <span>←</span></button><button class="pli-order" onclick="go('order')">ثبت سفارش</button></div></div>
+        <div class="pli"><div class="pli-body"><div class="pli-ico"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M12 2v4M12 18v4M4.22 4.22l2.83 2.83M16.95 16.95l2.83 2.83M1 12h4M19 12h4"/></svg></div><div class="pli-text"><span class="badge">اندازه‌گیری</span><h3>اندازه‌گیری مقاومت الکتریکی خاک</h3><p>اندازه‌گیری دقیق برای طراحی سیستم‌های ارتینگ و حفاظت کاتدی</p></div></div><div class="pli-foot"><button class="pli-btn" onclick="showDet('soil-resistance')">جزئیات <span>←</span></button><button class="pli-order" onclick="go('order')">ثبت سفارش</button></div></div>
+        <div class="pli"><div class="pli-body"><div class="pli-ico"><svg viewBox="0 0 24 24"><path d="M12 22V12M12 12L4 4M12 12l8-8"/><circle cx="12" cy="22" r="2"/></svg></div><div class="pli-text"><span class="badge">اندازه‌گیری</span><h3>اندازه‌گیری مقاومت چاه‌های ارت</h3><p>سنجش و تأیید مقاومت چاه‌های ارت طبق استانداردهای ملی</p></div></div><div class="pli-foot"><button class="pli-btn" onclick="showDet('earth-well')">جزئیات <span>←</span></button><button class="pli-order" onclick="go('order')">ثبت سفارش</button></div></div>
+      </div>
+    </div>
+  </div>
+  <footer><div class="foot-in"><div class="foot-bottom" style="border-top:none;padding-top:0"><p>© ۱۴۰۴ پویش سامانه</p><p>۰۹۱۲۲۴۱۰۸۲۸ | pooyeshsamaneh@gmail.com</p></div></div></footer>
+</div>
+
+<!-- ======== DETAIL ======== -->
+<div class="page" id="page-detail">
+  <div class="page-hero">
+    <div class="page-hero-in">
+      <div class="breadcrumb"><a onclick="go('home')">خانه</a><span>/</span><a onclick="go('products')">محصولات</a><span>/</span><span id="bc-title">—</span></div>
+      <h2 id="det-h">—</h2>
+      <p id="det-sub">—</p>
+    </div>
+  </div>
+  <div class="detail-wrap"><div class="detail-in" id="det-body"></div></div>
+  <footer><div class="foot-in"><div class="foot-bottom" style="border-top:none;padding-top:0"><p>© ۱۴۰۴ پویش سامانه</p><p>۰۹۱۲۲۴۱۰۸۲۸</p></div></div></footer>
+</div>
+
+<!-- ======== ORDER ======== -->
+<div class="page" id="page-order">
+  <div class="page-hero">
+    <div class="page-hero-in">
+      <div class="breadcrumb"><a onclick="go('home')">خانه</a><span>/</span><span>ثبت سفارش</span></div>
+      <h2>ثبت سفارش</h2>
+      <p>فرم زیر را تکمیل کنید — مشاوره اولیه رایگان است</p>
+    </div>
+  </div>
+  <div class="order-page">
+    <div class="order-in">
+      <div class="order-box">
+        <div>
+          <h3 style="font-size:17px;font-weight:700;color:var(--navy);margin-bottom:1.25rem">اطلاعات سفارش</h3>
+          <div class="fg"><label>نام و نام خانوادگی</label><input type="text" id="o-name"></div>
+          <div class="fg"><label>شماره موبایل</label><input type="tel" id="o-phone"></div>
+          <div class="fg"><label>ایمیل (اختیاری)</label><input type="email" id="o-email"></div>
+          <div class="fg"><label>محصول مورد نظر</label>
+            <select id="o-product">
+              <option>بهین‌گرما — هوشمندسازی موتورخانه</option>
+              <option>هوشمندسازی سیستم‌های حفاظت کاتدی</option>
+              <option>اجرای سیستم‌های حفاظت کاتدی</option>
+              <option>عیب‌یابی پوشش‌های شبکه (PCM & DCVG)</option>
+              <option>عیب‌یابی کابل‌های مدفون</option>
+              <option>اندازه‌گیری مقاومت الکتریکی خاک</option>
+              <option>اندازه‌گیری مقاومت چاه‌های ارت</option>
+            </select>
+          </div>
+          <div class="fg"><label>توضیحات پروژه</label><textarea id="o-desc" placeholder="محل اجرا، ابعاد پروژه..."></textarea></div>
+          <button class="form-submit" onclick="submitOrder()">ثبت سفارش</button>
+          <div class="success-box" id="o-success">سفارش ثبت شد! طی ۲۴ ساعت با شما تماس می‌گیریم.</div>
+        </div>
+        <div>
+          <h3 style="font-size:17px;font-weight:700;color:var(--navy);margin-bottom:1rem">مراحل کار</h3>
+          <p style="font-size:13px;color:var(--muted);line-height:1.9;margin-bottom:1.5rem">پس از ثبت، تیم ما طی ۲۴ ساعت کاری با شما تماس می‌گیرد.</p>
+          <div class="osteps">
+            <div class="ost"><div class="ost-n">۱</div><div><h4>تکمیل فرم</h4><p>مشخصات و نیاز پروژه را وارد کنید</p></div></div>
+            <div class="ost"><div class="ost-n">۲</div><div><h4>مشاوره رایگان</h4><p>کارشناس ما با شما تماس می‌گیرد</p></div></div>
+            <div class="ost"><div class="ost-n">۳</div><div><h4>پیشنهاد قیمت</h4><p>ارسال پیشنهاد رسمی و قرارداد</p></div></div>
+            <div class="ost"><div class="ost-n">۴</div><div><h4>نصب و راه‌اندازی</h4><p>تیم فنی در محل شما نصب را انجام می‌دهد</p></div></div>
+          </div>
+          <div class="contact-box">
+            <h5>تماس مستقیم</h5>
+            <p>📞 ۰۹۱۲۲۴۱۰۸۲۸</p>
+            <p>✉️ pooyeshsamaneh@gmail.com</p>
+            <p>📍 زنجان، خیابان بعثت</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <footer><div class="foot-in"><div class="foot-bottom" style="border-top:none;padding-top:0"><p>© ۱۴۰۴ پویش سامانه</p><p>۰۹۱۲۲۴۱۰۸۲۸</p></div></div></footer>
+</div>
+
+<script>
+const PRODUCTS={
+  'behin-garma':{
+    title:'بهین‌گرما',sub:'پلتفرم جامع پایش و کنترل هوشمند موتورخانه',tag:'محصول اصلی',
+    desc:'بهین‌گرما یک پلتفرم یکپارچه سخت‌افزاری–نرم‌افزاری است که داده‌های محیطی موتورخانه را جمع‌آوری، پردازش و کنترل می‌کند. این سیستم امکان پایش لحظه‌ای دمای محیط بیرون، موتورخانه، دیگ و آب رفت‌وبرگشت را فراهم می‌کند و از طریق رله‌های خروجی، فرمان به مشعل‌ها و پمپ‌ها ارسال می‌کند.',
+    features:['پایش لحظه‌ای دمای محیط بیرون، موتورخانه، دیگ و آب رفت‌وبرگشت','ارسال فرمان هوشمند به مشعل‌ها و پمپ‌های گردش آب','اتصال از طریق سیم‌کارت، اترنت یا وای‌فای','حافظه داخلی یک‌ماهه و باتری پشتیبان در قطع برق','داشبورد تحت وب و اپلیکیشن موبایل','هشدار فوری از طریق پیامک، ایمیل و داشبورد','رمزنگاری کامل طبق استانداردهای ملی گاز','حالت ضد یخ‌زدگی و شیفت‌بندی پمپ‌ها'],
+    specs:[{v:'۱ ماه',l:'حافظه داخلی'},{v:'SIM/LAN',l:'اتصال'},{v:'۴ رله',l:'خروجی کنترل'},{v:'۲۴/۷',l:'پشتیبانی'}],
+    phases:[{n:'۱',t:'اتوماسیون هوشمند (وضعیت فعلی)'},{n:'۲',t:'هوش مصنوعی و یادگیری ماشین'},{n:'۳',t:'یکپارچگی با شبکه هوشمند شهری'}],
+    cards:[{title:'مدیریت هوشمند انرژی',desc:'سناریوهای زمانی دقیق و تنظیم دما بر اساس هوای بیرون — از کارکرد بیهوده مشعل‌ها جلوگیری می‌شود.'},{title:'حفاظت تجهیزات',desc:'شیفت‌بندی پمپ‌ها و مشعل‌ها فشار کاری را توزیع کرده و عمر مفید تجهیزات را افزایش می‌دهد.'},{title:'امنیت سایبری',desc:'رمزنگاری کامل، احراز هویت چندلایه و مقاومت در برابر حملات — اثبات‌شده با تست نفوذ.'},{title:'عملکرد مستقل',desc:'حافظه یک‌ماهه و باتری پشتیبان تضمین می‌کنند سیستم حتی در قطع برق و اینترنت کار کند.'}]
+  }
+};
+const COMING=['cathodic-smart','cathodic-impl','pcm-dcvg','buried-cable','soil-resistance','earth-well'];
+const TITLES={'cathodic-smart':'هوشمندسازی سیستم‌های حفاظت کاتدی','cathodic-impl':'اجرای سیستم‌های حفاظت کاتدی','pcm-dcvg':'عیب‌یابی پوشش‌های شبکه (PCM & DCVG)','buried-cable':'عیب‌یابی کابل‌های مدفون','soil-resistance':'اندازه‌گیری مقاومت الکتریکی خاک','earth-well':'اندازه‌گیری مقاومت چاه‌های ارت'};
+
+function go(p){
+  document.querySelectorAll('.page').forEach(x=>x.classList.remove('active'));
+  document.getElementById('page-'+p).classList.add('active');
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+function showDet(id){
+  const p=PRODUCTS[id];
+  document.getElementById('bc-title').textContent=p?p.title:TITLES[id];
+  document.getElementById('det-h').textContent=p?p.title:TITLES[id];
+  document.getElementById('det-sub').textContent=p?p.sub:'';
+  const b=document.getElementById('det-body');
+  if(p){
+    b.innerHTML=`<div class="det-top">
+      <div class="det-left">
+        <span class="tag" style="margin-bottom:.75rem">${p.tag}</span>
+        <h1>${p.title}</h1>
+        <p>${p.desc}</p>
+        <div class="det-feats">${p.features.map(f=>`<div class="det-feat"><div class="det-feat-ic"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div>${f}</div>`).join('')}</div>
+        <div class="det-btns">
+          <button class="btn-navy" onclick="go('order')">ثبت سفارش</button>
+          <button class="btn-border" onclick="goContact()">تماس با ما</button>
+        </div>
+      </div>
+      <div class="det-right">
+        <div class="det-specs-t">مشخصات فنی</div>
+        <div class="det-specs">${p.specs.map(s=>`<div class="ds"><div class="ds-v">${s.v}</div><div class="ds-l">${s.l}</div></div>`).join('')}</div>
+        <div class="det-specs-t">نقشه راه</div>
+        <div class="det-phases">${p.phases.map(ph=>`<div class="det-phase"><div class="dp-num">${ph.n}</div><p>${ph.t}</p></div>`).join('')}</div>
+      </div>
+    </div>
+    <div class="det-cards-sec">
+      <h2>ارزش‌آفرینی برای ساختمان</h2>
+      <div class="det-cards">${p.cards.map(c=>`<div class="dc"><h4>${c.title}</h4><p>${c.desc}</p></div>`).join('')}
+      </div>
+    </div>`;
+  } else {
+    b.innerHTML=`<div class="coming-card">
+      <h3>${TITLES[id]}</h3>
+      <p>اطلاعات تکمیلی این محصول به‌زودی اضافه می‌شود.<br>برای اطلاعات بیشتر با ما تماس بگیرید.</p>
+      <button class="btn-navy" onclick="go('order')">استعلام قیمت</button>
+    </div>`;
+  }
+  go('detail');
+}
+function goContact(){
+  go('home');
+  setTimeout(()=>document.getElementById('contact-sec').scrollIntoView({behavior:'smooth'}),200);
+}
+function submitContact(){
+  const n=document.getElementById('c-name').value.trim();
+  const p=document.getElementById('c-phone').value.trim();
+  if(!n||!p){alert('لطفاً نام و شماره موبایل را وارد کنید.');return;}
+  document.getElementById('c-success').style.display='block';
+  document.getElementById('c-name').value='';
+  document.getElementById('c-phone').value='';
+  document.getElementById('c-msg').value='';
+}
+function submitOrder(){
+  const n=document.getElementById('o-name').value.trim();
+  const p=document.getElementById('o-phone').value.trim();
+  if(!n||!p){alert('لطفاً نام و شماره موبایل را وارد کنید.');return;}
+  document.getElementById('o-success').style.display='block';
+  document.getElementById('o-name').value='';
+  document.getElementById('o-phone').value='';
+  document.getElementById('o-email').value='';
+  document.getElementById('o-desc').value='';
+}
+</script>
 </body>
 </html>
