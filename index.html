@@ -659,6 +659,7 @@ function showDet(id){
         <div class="det-btns">
           <button class="btn-navy" onclick="go('order')">ثبت سفارش</button>
           <button class="btn-border" onclick="goContact()">تماس با ما</button>
+          <button class="btn-white" onclick="" >دفترچه راهنما استفاده محصول</button>
         </div>
       </div>
       <div class="det-right">
@@ -705,6 +706,15 @@ function submitOrder(){
   document.getElementById('o-email').value='';
   document.getElementById('o-desc').value='';
 }
+</script>
+
+<script>
+  const params = new URLSearchParams(window.location.search);
+  const value = params.get('page');
+  if(value == 'behingarma') {
+    showDet('behin-garma')
+  }
+
 </script>
 </body>
 </html>
